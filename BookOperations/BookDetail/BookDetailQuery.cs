@@ -6,6 +6,7 @@ namespace BookStore.BookOperations.BookDetail
 {
     public class BookDetailQuery
     {
+        public int BookId { get; set; }
         private readonly BookStoreDbContext _dbContext;
         private readonly IMapper _mapper;
         public BookDetailQuery(BookStoreDbContext dbContext, IMapper mapper)
@@ -14,9 +15,9 @@ namespace BookStore.BookOperations.BookDetail
             _mapper = mapper;
         }
 
-        public BookDetailViewModel Handle(int Id)
+        public BookDetailViewModel Handle()
         {
-            var book = _dbContext.Books.Where(x => x.Id == Id).SingleOrDefault();
+            var book = _dbContext.Books.Where(x => x.Id == BookId).SingleOrDefault();
             BookDetailViewModel bookDetail = _mapper.Map<BookDetailViewModel>(book);
             //bookDetail.Title=book.Title;
             //bookDetail.PublishDate = book.PublishDate.ToString();

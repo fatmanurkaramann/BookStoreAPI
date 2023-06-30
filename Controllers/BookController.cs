@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static BookStore.BookOperations.CreateBook.CreateBookCommand;
 using static BookStore.BookOperations.EditBook.EditBookCommand;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BookStore.Controllers
 {
@@ -39,7 +40,11 @@ namespace BookStore.Controllers
         public IActionResult GetById(int Id)
         {
             BookDetailQuery query = new BookDetailQuery(_dbContext,_mapper);
-            var result = query.Handle(Id);
+            query.BookId= Id;
+
+            BookDetailValidator validations = new BookDetailValidator();
+            validations.ValidateAndThrow(query);
+            var result = query.Handle();
             return Ok(result);
         }
 
@@ -53,14 +58,7 @@ namespace BookStore.Controllers
                 command.Model = newBook;
                 CreateBookValidator validations = new CreateBookValidator();
                validations.ValidateAndThrow(command);
-                //if (!result.IsValid)
-                //{
-                //    foreach (var err in result.Errors)
-                //    {
-                //        Console.WriteLine(err.PropertyName+"-"+err.ErrorMessage);
-                //    }
-                //}
-                //else
+           
                 command.Handle();
 
 
@@ -80,8 +78,10 @@ namespace BookStore.Controllers
             try
             {
                 command.BookId = id;
-
                 command.Model = updatedBook;
+
+                
+
                 command.Handle();
 
 
