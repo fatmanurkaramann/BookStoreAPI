@@ -1,9 +1,12 @@
-﻿using BookStore.BookOperations.CreateBook;
+﻿using BookStore.BookOperations.BookDetail;
+using BookStore.BookOperations.CreateBook;
+using BookStore.BookOperations.EditBook;
 using BookStore.BookOperations.GetBooks;
 using BookStore.DbOperations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static BookStore.BookOperations.CreateBook.CreateBookCommand;
+using static BookStore.BookOperations.EditBook.EditBookCommand;
 
 namespace BookStore.Controllers
 {
@@ -27,19 +30,12 @@ namespace BookStore.Controllers
         }
 
         [HttpGet("{Id}")]
-        public Book GetById(int Id)
+        public IActionResult GetById(int Id)
         {
-            var bookList = _dbContext.Books.Where(x => x.Id == Id).SingleOrDefault();
-            return bookList;
+            BookDetailQuery query = new BookDetailQuery(_dbContext);
+            var result = query.Handle(Id);
+            return Ok(result);
         }
-
-        //[HttpGet]
-        //public Book Get([FromQuery] string id)
-        //{
-        //    var book = books.Where(x => x.Id == Convert.ToInt32(id)).SingleOrDefault();
-
-        //    return book;
-        //}
 
         [HttpPost]
         public IActionResult addBook([FromBody] CreateBookModel newBook)
@@ -50,6 +46,8 @@ namespace BookStore.Controllers
             {
                 command.Model = newBook;
                 command.Handle();
+
+
                 return Ok();
             }
             catch (Exception ex)
@@ -60,19 +58,24 @@ namespace BookStore.Controllers
 
         }
         [HttpPut("{id}")]
-        public  IActionResult updateBook(int id, [FromBody] Book updatedBook)
+        public  IActionResult updateBook(int id, [FromBody] EditBookModel updatedBook)
         {
-            var book = _dbContext.Books.SingleOrDefault(x => x.Id == id);
-            if (book == null)
-            {
-                return BadRequest();
-            }
+            EditBookCommand command = new EditBookCommand(_dbContext);
 
-            book.Title = updatedBook.Title;
-            book.GenreId = updatedBook.GenreId != default ? updatedBook.GenreId : book.GenreId;
-            book.PageCount = updatedBook.PageCount != default ? updatedBook.PageCount : book.PageCount;
-            _dbContext.SaveChanges();
-            return Ok();
+            try
+            {
+                command.BookId = id;
+
+                command.Model = updatedBook;
+                command.Handle();
+
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("{Id}")]
