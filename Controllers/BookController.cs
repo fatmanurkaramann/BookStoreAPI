@@ -1,5 +1,6 @@
 ﻿using BookStore.BookOperations.BookDetail;
 using BookStore.BookOperations.CreateBook;
+using BookStore.BookOperations.DeleteBook;
 using BookStore.BookOperations.EditBook;
 using BookStore.BookOperations.GetBooks;
 using BookStore.DbOperations;
@@ -81,9 +82,9 @@ namespace BookStore.Controllers
         [HttpDelete("{Id}")]
         public IActionResult deleteBook(int Id)
         {
-            var book= _dbContext.Books.SingleOrDefault(x=>x.Id==Id);
-            _dbContext.Books.Remove(book);
-            _dbContext.SaveChanges();
+            DeleteBookCommand command = new DeleteBookCommand(_dbContext);
+            command.BookId = Id;
+            command.Handle();
             return Ok();
         }
     }
