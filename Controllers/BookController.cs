@@ -5,6 +5,8 @@ using BookStore.BookOperations.DeleteBook;
 using BookStore.BookOperations.EditBook;
 using BookStore.BookOperations.GetBooks;
 using BookStore.DbOperations;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static BookStore.BookOperations.CreateBook.CreateBookCommand;
@@ -49,6 +51,16 @@ namespace BookStore.Controllers
             try
             {
                 command.Model = newBook;
+                CreateBookValidator validations = new CreateBookValidator();
+               validations.ValidateAndThrow(command);
+                //if (!result.IsValid)
+                //{
+                //    foreach (var err in result.Errors)
+                //    {
+                //        Console.WriteLine(err.PropertyName+"-"+err.ErrorMessage);
+                //    }
+                //}
+                //else
                 command.Handle();
 
 
@@ -56,7 +68,6 @@ namespace BookStore.Controllers
             }
             catch (Exception ex)
             {
-
                return BadRequest(ex.Message);
             }
 
@@ -87,6 +98,8 @@ namespace BookStore.Controllers
         {
             DeleteBookCommand command = new DeleteBookCommand(_dbContext);
             command.BookId = Id;
+            DeleteBookValidator validations = new DeleteBookValidator();
+            validations.ValidateAndThrow(command);
             command.Handle();
             return Ok();
         }

@@ -34,3 +34,4 @@ C:\Users\fato\Desktop\Yazılım\C#\BookStore\BookStore\bin\Debug\net6.0\Microsof
 C:\Users\fato\Desktop\Yazılım\C#\BookStore\BookStore\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\fato\Desktop\Yazılım\C#\BookStore\BookStore\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\fato\Desktop\Yazılım\C#\BookStore\BookStore\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\fato\Desktop\Yazılım\C#\BookStore\BookStore\bin\Debug\net6.0\FluentValidation.dll
