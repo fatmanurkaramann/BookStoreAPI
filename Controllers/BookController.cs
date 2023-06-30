@@ -1,4 +1,5 @@
-﻿using BookStore.BookOperations.BookDetail;
+﻿using AutoMapper;
+using BookStore.BookOperations.BookDetail;
 using BookStore.BookOperations.CreateBook;
 using BookStore.BookOperations.DeleteBook;
 using BookStore.BookOperations.EditBook;
@@ -16,16 +17,18 @@ namespace BookStore.Controllers
     public class BookController : ControllerBase
     {
         readonly BookStoreDbContext _dbContext;
-        public BookController(BookStoreDbContext context)
+        private readonly IMapper _mapper;
+        public BookController(BookStoreDbContext context, IMapper mapper)
         {
             _dbContext = context;
+            _mapper = mapper;
         }
 
 
         [HttpGet]
         public IActionResult GetBooks()
         {
-            GetBooksQuery query = new GetBooksQuery(_dbContext);
+            GetBooksQuery query = new GetBooksQuery(_dbContext, _mapper);
             var result = query.Handler();
             return Ok(result);
         }
@@ -33,7 +36,7 @@ namespace BookStore.Controllers
         [HttpGet("{Id}")]
         public IActionResult GetById(int Id)
         {
-            BookDetailQuery query = new BookDetailQuery(_dbContext);
+            BookDetailQuery query = new BookDetailQuery(_dbContext,_mapper);
             var result = query.Handle(Id);
             return Ok(result);
         }
@@ -41,7 +44,7 @@ namespace BookStore.Controllers
         [HttpPost]
         public IActionResult addBook([FromBody] CreateBookModel newBook)
         {
-             CreateBookCommand command = new CreateBookCommand(_dbContext);
+             CreateBookCommand command = new CreateBookCommand(_dbContext,_mapper);
 
             try
             {
@@ -61,7 +64,7 @@ namespace BookStore.Controllers
         [HttpPut("{id}")]
         public  IActionResult updateBook(int id, [FromBody] EditBookModel updatedBook)
         {
-            EditBookCommand command = new EditBookCommand(_dbContext);
+            EditBookCommand command = new EditBookCommand(_dbContext,_mapper);
 
             try
             {

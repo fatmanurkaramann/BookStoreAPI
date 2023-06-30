@@ -1,4 +1,5 @@
-﻿using BookStore.Common;
+﻿using AutoMapper;
+using BookStore.Common;
 using BookStore.DbOperations;
 
 namespace BookStore.BookOperations.BookDetail
@@ -6,19 +7,21 @@ namespace BookStore.BookOperations.BookDetail
     public class BookDetailQuery
     {
         private readonly BookStoreDbContext _dbContext;
-        public BookDetailQuery(BookStoreDbContext dbContext)
+        private readonly IMapper _mapper;
+        public BookDetailQuery(BookStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public BookDetailViewModel Handle(int Id)
         {
             var book = _dbContext.Books.Where(x => x.Id == Id).SingleOrDefault();
-            BookDetailViewModel bookDetail = new BookDetailViewModel();
-            bookDetail.Title=book.Title;
-            bookDetail.PublishDate = book.PublishDate.ToString();
-            bookDetail.Genre = ((GenreEnum)book.GenreId).ToString();
-            bookDetail.PageCount = book.PageCount;
+            BookDetailViewModel bookDetail = _mapper.Map<BookDetailViewModel>(book);
+            //bookDetail.Title=book.Title;
+            //bookDetail.PublishDate = book.PublishDate.ToString();
+            //bookDetail.Genre = ((GenreEnum)book.GenreId).ToString();
+            //bookDetail.PageCount = book.PageCount;
             return bookDetail;
         }
 

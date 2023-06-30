@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Wt+lePs0QPXICWvGnvDBw6rbyXor/dcnHyXoreli76AmsMmvPiB5le2lDhtlUna4pht6S2dFE4RyOhCPkBf+RA==",
+  "dgSpecHash": "cT5aYQnslLUQk+X3MjR7Cm5un5J8YwFet4x2nZOyhRlJ/eHfG0VLneJhrFbz8poYfWuoVo4YpE50uoXOND1Flg==",
   "success": true,
   "projectFilePath": "C:\\Users\\fato\\Desktop\\Yazılım\\C#\\BookStore\\BookStore\\BookStore.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\fato\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\fato\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
+    "C:\\Users\\fato\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\fato\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.19\\microsoft.entityframeworkcore.6.0.19.nupkg.sha512",
     "C:\\Users\\fato\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.19\\microsoft.entityframeworkcore.abstractions.6.0.19.nupkg.sha512",
     "C:\\Users\\fato\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.19\\microsoft.entityframeworkcore.analyzers.6.0.19.nupkg.sha512",

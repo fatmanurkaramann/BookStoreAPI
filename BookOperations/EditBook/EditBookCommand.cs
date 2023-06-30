@@ -1,4 +1,5 @@
-﻿using BookStore.DbOperations;
+﻿using AutoMapper;
+using BookStore.DbOperations;
 
 namespace BookStore.BookOperations.EditBook
 {
@@ -7,10 +8,12 @@ namespace BookStore.BookOperations.EditBook
         public EditBookModel Model { get; set; }
         public int BookId { get; set; }
         private readonly BookStoreDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public EditBookCommand(BookStoreDbContext dbContext)
+        public EditBookCommand(BookStoreDbContext dbContext,IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }   
 
         public void Handle()
@@ -20,10 +23,7 @@ namespace BookStore.BookOperations.EditBook
             {
                 throw new InvalidOperationException();
             }
-            book.Title=Model.Title;
-            book.PublishDate=Model.PublishDate;
-            book.GenreId=Model.GenreId;
-            book.PageCount=Model.PageCount;
+            _mapper.Map(Model, book);
 
             _dbContext.SaveChanges();
         }
