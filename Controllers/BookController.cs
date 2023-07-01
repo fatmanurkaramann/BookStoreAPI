@@ -54,8 +54,7 @@ namespace BookStore.Controllers
         {
              CreateBookCommand command = new CreateBookCommand(_dbContext,_mapper);
 
-            try
-            {
+           
                 command.Model = newBook;
                 CreateBookValidator validations = new CreateBookValidator();
                validations.ValidateAndThrow(command);
@@ -64,11 +63,7 @@ namespace BookStore.Controllers
 
 
                 return Ok();
-            }
-            catch (Exception ex)
-            {
-               return BadRequest(ex.Message);
-            }
+         
 
         }
         [HttpPut("{id}")]

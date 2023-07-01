@@ -1,4 +1,5 @@
 using BookStore.DbOperations;
+using BookStore.Middleware;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -26,7 +27,7 @@ app.UseHttpsRedirection();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseCustomExceptionMiddleware();
 app.MapControllers();
 
 app.Run();
