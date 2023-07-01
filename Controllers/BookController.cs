@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static BookStore.BookOperations.CreateBook.CreateBookCommand;
 using static BookStore.BookOperations.EditBook.EditBookCommand;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BookStore.Controllers
@@ -80,7 +81,8 @@ namespace BookStore.Controllers
                 command.BookId = id;
                 command.Model = updatedBook;
 
-                
+                UpdateBookValidator validations = new UpdateBookValidator();
+                validations.ValidateAndThrow(command);
 
                 command.Handle();
 
