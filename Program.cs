@@ -1,5 +1,6 @@
 using BookStore.DbOperations;
 using BookStore.Middleware;
+using BookStore.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -12,7 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BookStoreDbContext>(options =>
-    options.UseInMemoryDatabase("BookStoreDb"));
+    options.UseInMemoryDatabase(databaseName:"BookStoreDb"));
+builder.Services.AddSingleton<ILoggerService,DbLogger>(); 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

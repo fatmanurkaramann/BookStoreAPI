@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BookStore.Services;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net;
 
@@ -7,10 +8,11 @@ namespace BookStore.Middleware
     public class CustomExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-
-        public CustomExceptionMiddleware(RequestDelegate next)
+        private readonly ILoggerService _loggerService;
+        public CustomExceptionMiddleware(RequestDelegate next, ILoggerService loggerService)
         {
             _next = next;
+            _loggerService = loggerService;
         }
 
         public async Task Invoke(HttpContext httpContext)
@@ -20,12 +22,14 @@ namespace BookStore.Middleware
             try
             {
                 string message = "[Request] HTTP" + httpContext.Request.Method + "-" + httpContext.Request.Path;
+                _loggerService.Write(message);
+
                 await _next(httpContext);
                 watch.Stop();
 
                 message = "[response] HTTP" + httpContext.Request.Method + "-" + httpContext.Request.Path + " responded "
                     + httpContext.Response.StatusCode + " in " + watch.Elapsed.TotalMilliseconds + " ms";
-                Console.WriteLine(message);
+                _loggerService.Write(message);
 
             }
             catch (Exception ex)
@@ -39,7 +43,7 @@ namespace BookStore.Middleware
         {
             string message="Error "+httpContext.Request.Method+"-"+ httpContext.Response.StatusCode+" "+
                 ex.Message + " in " + watch.Elapsed.TotalMilliseconds + " ms";
-            Console.WriteLine(message);
+            _loggerService.Write(message);
 
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
