@@ -1,4 +1,6 @@
-﻿namespace BookStore
+﻿using BookStore.Entities;
+
+namespace BookStore
 {
     public interface IDataGenerator
     {
