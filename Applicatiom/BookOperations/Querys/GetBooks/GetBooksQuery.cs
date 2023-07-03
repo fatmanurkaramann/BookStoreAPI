@@ -1,6 +1,7 @@
-﻿using AutoMapper;
+﻿    using AutoMapper;
 using BookStore.Common;
 using BookStore.DbOperations;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.BookOperations.GetBooks
 {
@@ -16,7 +17,7 @@ namespace BookStore.BookOperations.GetBooks
         }
         public List<BooksViewModel> Handler()
         {
-            var bookList=_dbContext.Books.ToList();
+            var bookList=_dbContext.Books.Include(x => x.Genre).ToList();
             List<BooksViewModel> vm = _mapper.Map<List<BooksViewModel>>(bookList);
             //foreach (var item in bookList)
             //{

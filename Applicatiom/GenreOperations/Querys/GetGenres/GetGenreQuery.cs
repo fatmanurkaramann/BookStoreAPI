@@ -24,7 +24,7 @@ namespace BookStore.Applicatiom.GenreOperations.Querys.GetGenres
     }
     public class GenreViewModel
     {
-        public string GenreId { get; set; }
-        public string GenreName { get; set; }
+        public int GenreId { get; set; }
+        public string Name { get; set; }
     }
 }

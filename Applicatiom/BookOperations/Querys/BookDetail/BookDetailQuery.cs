@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BookStore.Common;
 using BookStore.DbOperations;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.BookOperations.BookDetail
 {
@@ -17,7 +18,7 @@ namespace BookStore.BookOperations.BookDetail
 
         public BookDetailViewModel Handle()
         {
-            var book = _dbContext.Books.Where(x => x.Id == BookId).SingleOrDefault();
+            var book = _dbContext.Books.Include(x=>x.Genre).Where(x => x.Id == BookId).SingleOrDefault();
             BookDetailViewModel bookDetail = _mapper.Map<BookDetailViewModel>(book);
             //bookDetail.Title=book.Title;
             //bookDetail.PublishDate = book.PublishDate.ToString();

@@ -18,16 +18,25 @@ namespace BookStore.Applicatiom.GenreOperations.Commands.CreateGenre
 
         public void Handle()
         {
-            var genre = _dbContext.Genres.SingleOrDefault(x => x.Name == CreateViewModel.GenreName);
+            var genre = _dbContext.Genres.SingleOrDefault(x => x.Name == CreateViewModel.Name);
             if (genre == null)
-                throw new InvalidOperationException("Kitap türü mevcut");
-            genre = _mapper.Map<Genre>(CreateViewModel);
-            _dbContext.Genres.AddRange(genre);
+            {
+                genre = _mapper.Map<Genre>(CreateViewModel);
+                _dbContext.Genres.Add(genre);
+                _dbContext.SaveChanges();
+
+            }
+            else
+            {
+                // Mevcut türün özelliklerini güncelleme
+                genre.Name = CreateViewModel.Name;
+            }
+
             _dbContext.SaveChanges();
         }
     }
     public class CreateGenreViewModel
     {
-        public string GenreName { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -20,13 +20,13 @@ namespace BookStore.Applicatiom.GenreOperations.Querys.GenreDetail
             var genre=_dbContext.Genres.Where(x=>x.IsActive && x.GenreId == GenreId).SingleOrDefault();
             if (genre == null)
                 throw new InvalidOperationException("Kitap türü bulunamadı");
-            GenreDetailViewModel bookDetail = _mapper.Map<GenreDetailViewModel>(genre);
-            return bookDetail;
+            GenreDetailViewModel genreDetail = _mapper.Map<GenreDetailViewModel>(genre);
+            return genreDetail;
         }
     }
     public class GenreDetailViewModel
     {
-        public int Id { get; set; }
+        public int GenreId { get; set; }
         public string Name { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace BookStore.Applicatiom.GenreOperations.Commands.CreateGenre
     {
         public CreateGenreValidator()
         {
-            RuleFor(query => query.CreateViewModel.GenreName).NotEmpty().MinimumLength(2);
+            RuleFor(query => query.CreateViewModel.Name).NotEmpty().MinimumLength(2);
         }
     }
 }
