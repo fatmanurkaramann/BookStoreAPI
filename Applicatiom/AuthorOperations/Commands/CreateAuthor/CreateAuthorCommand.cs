@@ -23,7 +23,7 @@ namespace BookStore.Applicatiom.AuthorOperations.Commands.CreateAuthor
             if(authors == null)
             {
                 authors = _mapper.Map<Author>(CreateAuthorModel);
-                _dbContext.Author.Add(authors);
+                _dbContext.AddRange(authors);
                 _dbContext.SaveChanges();
             }
             else
