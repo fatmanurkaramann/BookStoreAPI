@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <Folder Include="Applicatiom\AuthorOperations\Commands\DeleteAuthor\" />
-    <Folder Include="Applicatiom\AuthorOperations\Queries\AuthorDetail\" />
   </ItemGroup>
 
 </Project>

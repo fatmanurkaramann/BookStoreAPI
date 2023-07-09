@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BookStore.Applicatiom.AuthorOperations.Commands.CreateAuthor;
 using BookStore.Applicatiom.AuthorOperations.Commands.UpdateAuthor;
+using BookStore.Applicatiom.AuthorOperations.Queries.AuthorDetail;
 using BookStore.Applicatiom.AuthorOperations.Queries.GetAuthors;
 using BookStore.Applicatiom.GenreOperations.Commands.CreateGenre;
 using BookStore.Applicatiom.GenreOperations.Querys.GenreDetail;
@@ -27,14 +28,16 @@ namespace BookStore.Common
             .MapFrom(src => src.Genre.Name));
 
 
+            //Genre
             CreateMap<Genre, GenreViewModel>();
             CreateMap<Genre, GenreDetailViewModel>();
-
             CreateMap<CreateGenreViewModel, Genre>();
-
+            
+            //Author
             CreateMap<CreateAuthorModel, Author>();
             CreateMap<Author, GetAuthorModel>();
             CreateMap<UpdateAuthorModel,Author>();
+            CreateMap<Author, AuthorDetailModel>();
         }
     }
 }
