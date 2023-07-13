@@ -8,10 +8,10 @@ namespace BookStore.Applicatiom.AuthorOperations.Commands.CreateAuthor
     public class CreateAuthorCommand
     {
         public CreateAuthorModel CreateAuthorModel { get; set; }
-        private readonly BookStoreDbContext _dbContext;
+        private readonly IBookStoreDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public CreateAuthorCommand(BookStoreDbContext dbContext, IMapper mapper)
+        public CreateAuthorCommand(IBookStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -19,11 +19,11 @@ namespace BookStore.Applicatiom.AuthorOperations.Commands.CreateAuthor
 
         public void Handle()
         {
-            var authors = _dbContext.Author.SingleOrDefault(x => x.Name == CreateAuthorModel.Name);
+            var authors = _dbContext.Authors.SingleOrDefault(x => x.Name == CreateAuthorModel.Name);
             if(authors == null)
             {
                 authors = _mapper.Map<Author>(CreateAuthorModel);
-                _dbContext.AddRange(authors);
+                _dbContext.Authors.AddRange(authors);
                 _dbContext.SaveChanges();
             }
             else

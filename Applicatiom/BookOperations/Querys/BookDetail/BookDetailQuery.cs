@@ -8,9 +8,9 @@ namespace BookStore.BookOperations.BookDetail
     public class BookDetailQuery
     {
         public int BookId { get; set; }
-        private readonly BookStoreDbContext _dbContext;
+        private readonly IBookStoreDbContext _dbContext;
         private readonly IMapper _mapper;
-        public BookDetailQuery(BookStoreDbContext dbContext, IMapper mapper)
+        public BookDetailQuery(IBookStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

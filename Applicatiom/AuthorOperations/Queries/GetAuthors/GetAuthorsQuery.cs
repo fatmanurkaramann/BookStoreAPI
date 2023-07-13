@@ -6,10 +6,10 @@ namespace BookStore.Applicatiom.AuthorOperations.Queries.GetAuthors
 {
     public class GetAuthorsQuery
     {
-        private readonly BookStoreDbContext _dbContext;
+        private readonly IBookStoreDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public GetAuthorsQuery(BookStoreDbContext dbContext, IMapper mapper)
+        public GetAuthorsQuery(IBookStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -17,7 +17,7 @@ namespace BookStore.Applicatiom.AuthorOperations.Queries.GetAuthors
 
         public List<GetAuthorModel> Handle()
         {
-            var genres = _dbContext.Author.OrderBy(e => e.AuthorId).ToList();
+            var genres = _dbContext.Authors.OrderBy(e => e.AuthorId).ToList();
             List<GetAuthorModel> authorModel = _mapper.Map<List<GetAuthorModel>>(genres);
 
             return authorModel;

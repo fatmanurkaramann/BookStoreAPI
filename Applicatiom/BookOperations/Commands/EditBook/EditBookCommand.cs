@@ -7,10 +7,10 @@ namespace BookStore.BookOperations.EditBook
     {
         public EditBookModel Model { get; set; }
         public int BookId { get; set; }
-        private readonly BookStoreDbContext _dbContext;
+        private readonly IBookStoreDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public EditBookCommand(BookStoreDbContext dbContext,IMapper mapper)
+        public EditBookCommand(IBookStoreDbContext dbContext,IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

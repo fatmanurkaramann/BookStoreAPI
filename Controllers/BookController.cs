@@ -18,16 +18,11 @@ namespace BookStore.Controllers
 {
     [ApiController] //http response dönceği anlamına gelir
     [Route("[controller]s")]
-    public class BookController : ControllerBase
+    public class BookController : ApiController
     {
-        readonly BookStoreDbContext _dbContext;
-        private readonly IMapper _mapper;
-        public BookController(BookStoreDbContext context, IMapper mapper)
+        public BookController(IBookStoreDbContext context, IMapper mapper) : base(context, mapper)
         {
-            _dbContext = context;
-            _mapper = mapper;
         }
-
 
         [HttpGet]
         public IActionResult GetBooks()

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.InMemory;
 namespace BookStore.DbOperations
 {
-    public class BookStoreDbContext:DbContext
+    public class BookStoreDbContext: DbContext, IBookStoreDbContext
     {
         //   protected override void OnConfiguring
         //(DbContextOptionsBuilder optionsBuilder)
@@ -16,7 +16,11 @@ namespace BookStore.DbOperations
         }
         public DbSet<Book> Books { get; set; } 
         public DbSet<Genre> Genres { get; set; }
-        public DbSet<Author> Author { get; set; }   
+        public DbSet<Author> Authors { get; set; }
 
+        public override int SaveChanges()
+        {
+            return base.SaveChanges();
+        }
     }
 }

@@ -5,11 +5,11 @@ namespace BookStore.Applicatiom.GenreOperations.Commands.UpdateGenre
 {
     public class UpdateGenreCommand
     {
-        private readonly BookStoreDbContext _dbContext;
+        private readonly IBookStoreDbContext _dbContext;
         private readonly IMapper _mapper;
         public int GenreId { get; set; }
         public UpdateGenreViewModel model { get; set; }
-        public UpdateGenreCommand(BookStoreDbContext dbContext, IMapper mapper)
+        public UpdateGenreCommand(IBookStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

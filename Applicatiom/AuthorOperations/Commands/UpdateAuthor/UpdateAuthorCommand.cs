@@ -6,11 +6,11 @@ namespace BookStore.Applicatiom.AuthorOperations.Commands.UpdateAuthor
 {
     public class UpdateAuthorCommand
     {
-        private readonly BookStoreDbContext _dbContext;
+        private readonly IBookStoreDbContext _dbContext;
         private readonly IMapper _mapper;
         public int AuthorId { get; set; }
         public UpdateAuthorModel Model { get; set; }
-    public UpdateAuthorCommand(BookStoreDbContext dbContext,IMapper mapper)
+    public UpdateAuthorCommand(IBookStoreDbContext dbContext,IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -18,7 +18,7 @@ namespace BookStore.Applicatiom.AuthorOperations.Commands.UpdateAuthor
 
         public void Handle()
         {
-            var author = _dbContext.Author.SingleOrDefault(x=>x.AuthorId==AuthorId);
+            var author = _dbContext.Authors.SingleOrDefault(x=>x.AuthorId==AuthorId);
             _mapper.Map(Model, author);
 
             _dbContext.SaveChanges();
