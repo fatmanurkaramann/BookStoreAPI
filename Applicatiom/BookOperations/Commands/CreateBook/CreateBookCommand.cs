@@ -19,7 +19,7 @@ namespace BookStore.BookOperations.CreateBook
             var book = _dbContext.Books.SingleOrDefault(x => x.Title == Model.Title);
             if(book is not null)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Kitap zaten mevcut");
             }
             book =_mapper.Map<Book>(Model);
             _dbContext.Books.AddRange(book);
