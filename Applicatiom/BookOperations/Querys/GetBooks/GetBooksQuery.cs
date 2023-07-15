@@ -17,7 +17,8 @@ namespace BookStore.BookOperations.GetBooks
         }
         public List<BooksViewModel> Handler()
         {
-            var bookList=_dbContext.Books.Include(x => x.Genre).ToList();
+            var bookList = _dbContext.Books.Include(x => x.Genre).Include(x => x.Author).ToList();
+
             List<BooksViewModel> vm = _mapper.Map<List<BooksViewModel>>(bookList);
             //foreach (var item in bookList)
             //{
@@ -37,6 +38,7 @@ namespace BookStore.BookOperations.GetBooks
     {
         public string Title { get; set; }
         public string Genre { get; set; }
+        public string Author { get; set; }
         public int PageCount { get; set; }
         public string PublishDate { get; set; }
     }

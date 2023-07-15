@@ -7,6 +7,7 @@ using BookStore.Applicatiom.GenreOperations.Querys.GetGenres;
 using BookStore.BookOperations.BookDetail;
 using BookStore.BookOperations.CreateBook;
 using BookStore.DbOperations;
+using BookStore.Entities;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using static BookStore.BookOperations.CreateBook.CreateBookCommand;
@@ -26,7 +27,19 @@ namespace BookStore.Controllers
 
         [HttpGet]
         public ActionResult GetGenresQuery()
+
         {
+
+            _dbContext.Genres.AddRange(
+                    new Genre
+                    {
+                        Name = "Personal",
+                    },
+                    new Genre
+                    {
+                        Name = "Roman",
+                    });
+            _dbContext.SaveChanges();
             GetGenreQuery getGenre =new GetGenreQuery(_dbContext,_mapper);
             return Ok(getGenre.Handle());
         }

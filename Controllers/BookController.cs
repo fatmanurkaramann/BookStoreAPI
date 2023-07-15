@@ -5,6 +5,7 @@ using BookStore.BookOperations.DeleteBook;
 using BookStore.BookOperations.EditBook;
 using BookStore.BookOperations.GetBooks;
 using BookStore.DbOperations;
+using BookStore.Entities;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
