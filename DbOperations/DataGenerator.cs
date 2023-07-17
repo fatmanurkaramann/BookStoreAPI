@@ -10,6 +10,7 @@ namespace BookStore.DbOperations
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
+            BookStoreDbContext bookStoreDbContext = serviceProvider.GetRequiredService<BookStoreDbContext>();
             IBookStoreDbContext db = serviceProvider.GetRequiredService<IBookStoreDbContext>();
             using (var context = new BookStoreDbContext(
         serviceProvider.GetRequiredService<DbContextOptions<BookStoreDbContext>>()))
@@ -42,6 +43,7 @@ namespace BookStore.DbOperations
                 };
                 db.Books.AddRange(books);
                 db.SaveChanges();
+                bookStoreDbContext.SaveChanges();
             }
         }
    

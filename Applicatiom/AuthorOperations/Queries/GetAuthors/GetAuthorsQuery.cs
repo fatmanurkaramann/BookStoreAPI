@@ -17,8 +17,8 @@ namespace BookStore.Applicatiom.AuthorOperations.Queries.GetAuthors
 
         public List<GetAuthorModel> Handle()
         {
-            var genres = _dbContext.Authors.OrderBy(e => e.AuthorId).ToList();
-            List<GetAuthorModel> authorModel = _mapper.Map<List<GetAuthorModel>>(genres);
+            var authors = _dbContext.Authors.OrderBy(e => e.AuthorId).ToList();
+            List<GetAuthorModel> authorModel = _mapper.Map<List<GetAuthorModel>>(authors);
 
             return authorModel;
         }

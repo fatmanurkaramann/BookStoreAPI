@@ -5,18 +5,15 @@ using BookStore.BookOperations.DeleteBook;
 using BookStore.BookOperations.EditBook;
 using BookStore.BookOperations.GetBooks;
 using BookStore.DbOperations;
-using BookStore.Entities;
 using FluentValidation;
-using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using static BookStore.BookOperations.CreateBook.CreateBookCommand;
 using static BookStore.BookOperations.EditBook.EditBookCommand;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BookStore.Controllers
 {
+    [Authorize]
     [ApiController] //http response dönceği anlamına gelir
     [Route("[controller]s")]
     public class BookController : ApiController
