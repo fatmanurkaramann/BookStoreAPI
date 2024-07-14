@@ -1597,11 +1597,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\fato\\Desktop\\Yazılım\\C#\\BookStore\\BookStore\\BookStore.csproj",
+      "projectUniqueName": "C:\\Users\\fato\\Desktop\\Projects\\BookStore\\BookStore\\BookStore.csproj",
       "projectName": "BookStore",
-      "projectPath": "C:\\Users\\fato\\Desktop\\Yazılım\\C#\\BookStore\\BookStore\\BookStore.csproj",
+      "projectPath": "C:\\Users\\fato\\Desktop\\Projects\\BookStore\\BookStore\\BookStore.csproj",
       "packagesPath": "C:\\Users\\fato\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fato\\Desktop\\Yazılım\\C#\\BookStore\\BookStore\\obj\\",
+      "outputPath": "C:\\Users\\fato\\Desktop\\Projects\\BookStore\\BookStore\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1629,6 +1629,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -1691,7 +1696,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.413\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303\\RuntimeIdentifierGraph.json"
       }
     }
   }
